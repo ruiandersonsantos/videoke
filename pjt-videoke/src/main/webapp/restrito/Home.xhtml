@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">Sistema de controle para videoke</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+
+<h:body>
+	<ui:include src="../topo.xhtml" />
+
+
+
+
+
+	<b:panel id="pn_listagem" collapsed="false" look="primary"
+		title="Painel de Controle">
+
+
+		<p:messages id="messages" autoUpdate="true" closable="true" />
+
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="col-sm-12">
+
+					<h:form id="frm_listEvento">
+
+						<!-- inicio do datatable para Evento -->
+
+						<div class="row-fluid">
+							<div class="col-sm-6">
+
+								<b:panel id="pn_envento" collapsed="false" look="success"
+									title="Evento aberto">
+
+									<div class="table-responsive">
+										<p:dataTable id="EventoTable"
+											styleClass="table table-bordered table-striped table-hover table-condensed"
+											value="#{eventoBean.eventos}" var="evento"
+											style="margin-top: 10px" emptyMessage="Nenhum evento aberto.">
+
+											<p:column headerText="Código"
+												style="text-align: center; width: 5px">
+												<h:outputText value="#{evento.id}" />
+											</p:column>
+
+											<p:column headerText="Descrição" style=" width: 30px">
+												<h:outputText value="#{evento.descricao}" />
+											</p:column>
+
+											<p:column headerText="Abertura" style=" width: 5px">
+												<h:outputText id="dataAbertura"
+													value="#{evento.dataInicio.time}">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</h:outputText>
+											</p:column>
+
+											<p:column headerText="Ação"
+												style="text-align: center; width: 20px">
+												<b:commandButton update="frm_listEvento" icon="floppy-saved"
+													action="#{eventoBean.fecharEvento}" value="Fechar"
+													styleClass="btn btn-primary btn-md" />
+											</p:column>
+
+										</p:dataTable>
+
+									</div>
+								</b:panel>
+							</div>
+						</div>
+
+
+
+
+
+						<!-- inicio do datatable para Fila de participantes -->
+
+						<div class="row-fluid">
+							<div class="col-sm-6">
+
+								<b:panel id="pn_fila" collapsed="false" look="warning"
+									title="Fila de Participantes">
+
+									<div class="table-responsive">
+										<p:dataTable id="filaTable"
+											styleClass="table table-bordered table-striped table-hover table-condensed"
+											value="#{eventoBean.eventos}" var="evento"
+											style="margin-top: 10px" emptyMessage="Nenhum evento aberto.">
+
+											<p:column headerText="Código"
+												style="text-align: center; width: 5px">
+												<h:outputText value="#{evento.id}" />
+											</p:column>
+
+											<p:column headerText="Descrição" style=" width: 30px">
+												<h:outputText value="#{evento.descricao}" />
+											</p:column>
+
+											<p:column headerText="Abertura" style=" width: 5px">
+												<h:outputText id="dataAbertura"
+													value="#{evento.dataInicio.time}">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</h:outputText>
+											</p:column>
+
+											<p:column headerText="Ação"
+												style="text-align: center; width: 20px">
+												<b:commandButton update="frm_listEvento" icon="floppy-saved"
+													action="#{eventoBean.fecharEvento}" value="Fechar"
+													styleClass="btn btn-primary btn-md" />
+											</p:column>
+
+										</p:dataTable>
+
+									</div>
+								</b:panel>
+							</div>
+						</div>
+					</h:form>
+				</div>
+
+
+			</div>
+		</div>
+
+
+
+
+
+	</b:panel>
+
+
+	<p:separator style="margin-top: 20px" />
+
+	<ui:include src="../rodape.xhtml" />
+
+</h:body>
+
+</html>

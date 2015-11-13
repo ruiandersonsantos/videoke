@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">Sistema de controle para videoke</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+
+<h:body>
+	<p:ajaxStatus styleClass="ajax-status">
+		<f:facet name="start">
+			<h:graphicImage library="imagens" name="carregando.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<!-- Menu superior -->
+	<b:navBar brand="VIDEOKE-SHOW" brandhref="index.xhtml" inverse="true"
+		fixed="top">
+
+
+		<b:navbarLinks rendered="#{sessionScope.usuariologado != null}">
+
+			<b:navLink value="Painel" outcome="/restrito/Home"></b:navLink>
+
+			<b:dropMenu value="Evento">
+				<b:navLink value="Cadastrar Evento"
+					outcome="/evento/CadastroEvento.xhtml"></b:navLink>
+				<b:navLink value="Incluir Participante" href="#"></b:navLink>
+				<b:navLink value="Fechar Evento"
+					oncomplete="confirmafecharevento.show()"></b:navLink>
+				
+			</b:dropMenu>
+			
+			<b:dropMenu value="Participante">
+				<b:navLink value="Cadastrar Participante"
+					outcome="/participante/CadastroParticipante.xhtml"></b:navLink>
+				<b:navLink value="Alterar Fila" href="#"></b:navLink>
+							
+			</b:dropMenu>
+			
+			<b:dropMenu value="#{sessionScope.usuariologado.email}">
+				<b:navLink value="Relatórios" href="#"></b:navLink>
+				<b:navLink value="Sair do sistema" href="#" ></b:navLink>			
+			</b:dropMenu>
+			
+			
+		
+		</b:navbarLinks>
+		<h:form styleClass="navbar-form navbar-right"
+			rendered="#{sessionScope.usuariologado == null}">
+			<div class="form-group">
+				`
+				<b:inputText placeholder="Email" fieldSize="sm"
+					value="#{loginOrganizadorBean.login.email}" />
+			</div>
+			<div class="form-group">
+				<b:inputSecret placeholder="Senha" fieldSize="sm"
+					value="#{loginOrganizadorBean.login.senha}" />
+			</div> #{' '} <b:commandButton action="#{loginOrganizadorBean.logar}"
+				value="Logar" look="success" icon="chevron-right" iconAlign="right" />
+		</h:form>
+		<div style="clear: both"></div>
+	</b:navBar>
+
+
+
+
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+
+	<p:separator style="margin-top: 20px" />
+
+	<b:container>
+		<b:row>
+			<b:column col-md="4">
+				<h2>Trilha de aprendizado</h2>
+				<p>Acesse a trilha de aprendizado do seu curso e siga os passos
+					para se aperfeiçoar.</p>
+				<p>
+					<b:button outcome="" value="Ver detalhes »" />
+				</p>
+			</b:column>
+			<b:column col-md="4">
+				<h2>Downloads</h2>
+				<p>Faça download do material de apoio do seu curso</p>
+				<p>
+					<b:button outcome="" value="Ver detalhes »" />
+				</p>
+			</b:column>
+			<b:column col-md="4">
+				<h2>Fórum</h2>
+				<p>Não deixe de interagir com outros alunos do curso e com seu
+					professor</p>
+				<p>
+					<b:button outcome="" value="Acessar fórum »" />
+				</p>
+			</b:column>
+		</b:row>
+		<hr />
+		<footer>
+		<p>© Rui Anderson P. Santos 2015</p>
+		</footer>
+	</b:container>
+
+	<h:form>
+		<p:confirmDialog global="true">
+			<p:commandButton value="Não" type="button"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+
+			<p:commandButton value="Sim" type="button"
+				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+		</p:confirmDialog>
+
+		<p:confirmDialog id="confirmacaoFecharEvento"
+			widgetVar="confirmafecharevento" global="true"
+			message="Tem certeza que deseja fechar o Evento ? Operação não poderá ser modificada!"
+			header="Fechamento de Evento" severity="alert">
+
+			<p:commandButton value="Não"
+				onclick="confirmacaoFecharEvento.hide(); return false;" />
+			<p:commandButton value="Sim" onclick="confirmacaoFecharEvento.hide()"
+				action="#{eventoBean.fecharEvento}" />
+		</p:confirmDialog>
+	</h:form>
+
+</h:body>
+
+</html>
