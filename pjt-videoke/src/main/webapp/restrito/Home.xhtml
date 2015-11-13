@@ -95,26 +95,28 @@
 
 
 												<p:column headerText="Nome">
-													<h:outputText
-														style="width: 100px; text-align: left" 
+													<h:outputText style="width: 100px; text-align: left"
 														value="#{participante.primeironome}" />
 												</p:column>
-												
+
 												<p:column headerText="E-mail">
-													<h:outputText
-														style="width: 50px; text-align: left" 
+													<h:outputText style="width: 50px; text-align: left"
 														value="#{participante.email}" />
 												</p:column>
-												
-												<p:column headerText="Música" style="width: 100px; text-align: center" >
-													<h:inputText
-														style="width: 80px; text-align: center"
+
+												<p:column headerText="Música"
+													style="width: 100px; text-align: center">
+													<h:inputText style="width: 80px; text-align: center"
 														value="#{participante.primeiramusica}" />
 												</p:column>
-												
-												<p:column headerText="Acão" style="width: 80px; text-align: center">
-													<p:commandButton
-															icon="ui-icon-plusthick" />
+
+												<p:column headerText="Acão"
+													style="width: 80px; text-align: center">
+													<p:commandButton update=":frm_fila"
+														action="#{filaNoEventoBean.entrarNoEvento(participante)}"
+														icon="ui-icon-plusthick">
+														<f:param name="participante" value="#{participante}" />
+													</p:commandButton>
 												</p:column>
 
 											</p:dataTable>
@@ -185,55 +187,63 @@
 								</b:panel>
 							</div>
 						</div>
+					</h:form>
 
 
 
 
+					<!-- inicio do datatable para Fila de participantes -->
 
-						<!-- inicio do datatable para Fila de participantes -->
 
-						<div class="row-fluid">
-							<div class="col-sm-6">
-
+					<div class="row-fluid">
+						<div class="col-sm-6">
+							<h:form id="frm_fila">
 								<b:panel id="pn_fila" collapsed="false" look="warning"
 									title="Fila de Participantes">
 
 									<div class="table-responsive">
 										<p:dataTable id="filaTable"
 											styleClass="table table-bordered table-striped table-hover table-condensed"
-											value="#{eventoBean.eventos}" var="evento"
-											style="margin-top: 10px" emptyMessage="Nenhum evento aberto.">
+											value="#{filaNoEventoBean.listaParaCantar}" var="fila"
+											style="margin-top: 10px"
+											emptyMessage="Nenhum participante na fila.">
 
-											<p:column headerText="Código"
-												style="text-align: center; width: 5px">
-												<h:outputText value="#{evento.id}" />
+
+											<p:column headerText="Posição" style="width: 5px;">
+												<h:outputText value="#{fila.posicao}" style="width: 5px; text-align: center"/>
 											</p:column>
 
-											<p:column headerText="Descrição" style=" width: 30px">
-												<h:outputText value="#{evento.descricao}" />
+											<p:column headerText="Nome" style="width: 40px;">
+												<h:outputText value="#{fila.participante.primeironome}" />
 											</p:column>
 
-											<p:column headerText="Abertura" style=" width: 5px">
-												<h:outputText id="dataAbertura"
-													value="#{evento.dataInicio.time}">
-													<f:convertDateTime pattern="dd/MM/yyyy" />
-												</h:outputText>
+											<p:column headerText="Proxima"
+												style="width: 20px; text-align: center;">
+												<h:inputText value="#{fila.participante.primeiramusica}"
+													style="width: 60px; text-align: center" />
 											</p:column>
+
+
 
 											<p:column headerText="Ação"
-												style="text-align: center; width: 20px">
-												<b:commandButton update="frm_listEvento" icon="floppy-saved"
-													action="#{eventoBean.fecharEvento}" value="Fechar"
-													styleClass="btn btn-primary btn-md" />
+												style="text-align: center; width: 20px;">
+												<p:commandButton icon="ui-icon-play"
+													value="#{fila.codigomusica}" />
+											</p:column>
+
+											<p:column headerText="Alterar"
+												style="text-align: center; width: 20px;">
+												<p:commandButton icon="ui-icon-pencil" />
 											</p:column>
 
 										</p:dataTable>
 
 									</div>
 								</b:panel>
-							</div>
+							</h:form>
 						</div>
-					</h:form>
+					</div>
+
 				</div>
 
 
