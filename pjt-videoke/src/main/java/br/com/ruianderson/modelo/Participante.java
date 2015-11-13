@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
@@ -25,6 +26,9 @@ public class Participante {
 	private Integer celular;
 	private String senha;
 	private Date dataNascimento;
+	@Transient
+	private String primeiramusica;
+	
 	
 	
 	public Long getId() {
@@ -72,6 +76,16 @@ public class Participante {
 	}
 	public void setCelular(Integer celular) {
 		this.celular = celular;
+	}
+	
+	
+	
+	
+	public String getPrimeiramusica() {
+		return primeiramusica;
+	}
+	public void setPrimeiramusica(String primeiramusica) {
+		this.primeiramusica = primeiramusica;
 	}
 	@Override
 	public int hashCode() {

@@ -30,6 +30,116 @@
 			<div class="row-fluid">
 				<div class="col-sm-12">
 
+					<!-- inicio da pesquisa de participante -->
+
+					<div class="row-fluid">
+						<div class="col-sm-6">
+
+							<h:form id="frm_buscaparticipante">
+
+
+								<b:panel id="pn_busca" collapsed="false" look="danger"
+									title="Pesquisa de participante">
+
+
+
+
+									<label for="pnome" class="col-sm-2 control-label">Nome:</label>
+									<div class="col-sm-10">
+										<b:inputText id="pnome" span="8" style="margin-bottom: 15px;"
+											value="#{localizarParticipanteBean.nome}"
+											placeholder="Pesquisa pelo nome do participante" />
+									</div>
+
+									<label for="email" class="col-sm-2 control-label">Email:</label>
+									<div class="col-sm-10">
+										<b:inputText id="email" span="8" style="margin-bottom: 15px;"
+											value="#{localizarParticipanteBean.email}"
+											placeholder="Pesquisa pelo e-mail do participante" />
+									</div>
+
+									<label for="telefone" class="col-sm-2 control-label">Celular:</label>
+									<div class="col-sm-10">
+										<b:inputText id="telefone" span="8"
+											value="#{localizarParticipanteBean.celular}"
+											style="margin-bottom: 15px;"
+											placeholder="Pesquisa pelo celular do participante" />
+									</div>
+
+									<div class="col-sm-10">
+										<p:commandButton value="Pesquisar"
+											update=":frm_buscaparticipante"
+											action="#{localizarParticipanteBean.localizarParticipante}"
+											style="margin-left: 108px;" />
+									</div>
+
+
+
+									<b:panel id="pn_buscaPartic" collapsed="false"
+										style="margin-top: 190px" look="danger"
+										title="Resultado da pesquisa">
+
+										<p:commandButton value="Limpar Pesquisa"
+											update=":frm_buscaparticipante"
+											action="#{localizarParticipanteBean.limparPesquisa}" />
+
+
+										<div class="table-responsive">
+											<p:dataTable id="ParticipanteTable"
+												styleClass="table table-bordered table-striped table-hover table-condensed"
+												value="#{localizarParticipanteBean.listaparticipante}"
+												var="participante" style="margin-top: 20px"
+												emptyMessage="Nenhum participante encontrado." rows="10"
+												paginator="true" paginatorAlwaysVisible="false"
+												paginatorPosition="bottom">
+
+
+												<p:column headerText="Nome">
+													<h:outputText
+														style="width: 100px; text-align: left" 
+														value="#{participante.primeironome}" />
+												</p:column>
+												
+												<p:column headerText="E-mail">
+													<h:outputText
+														style="width: 50px; text-align: left" 
+														value="#{participante.email}" />
+												</p:column>
+												
+												<p:column headerText="Música" style="width: 100px; text-align: center" >
+													<h:inputText
+														style="width: 80px; text-align: center"
+														value="#{participante.primeiramusica}" />
+												</p:column>
+												
+												<p:column headerText="Acão" style="width: 80px; text-align: center">
+													<p:commandButton
+															icon="ui-icon-plusthick" />
+												</p:column>
+
+											</p:dataTable>
+										</div>
+
+
+
+									</b:panel>
+
+								</b:panel>
+
+
+							</h:form>
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+
 					<h:form id="frm_listEvento">
 
 						<!-- inicio do datatable para Evento -->

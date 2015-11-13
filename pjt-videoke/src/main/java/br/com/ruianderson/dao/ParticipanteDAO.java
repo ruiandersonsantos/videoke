@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+
 import br.com.ruianderson.modelo.Participante;
 
 
@@ -27,6 +28,26 @@ public class ParticipanteDAO implements Serializable{
 		
 		return em.find(Participante.class, codigo);
 	
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Participante> buscarParticipantes(String nome, String email,
+			Integer celular) {
+		return em.createQuery("select p from Participante p where p.primeironome like :nome and "
+				+ "p.email like :email")
+				.setParameter("nome", "%"+nome+"%")
+				.setParameter("email", "%"+email+"%")
+				.getResultList();
+		
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Participante> buscarParticipantes(Integer celular) {
+		return em.createQuery("select p from Participante p where p.celular = :celular")
+				.setParameter("celular", celular)
+				.getResultList();
+		
 	}
 
 }
