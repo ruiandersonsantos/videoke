@@ -52,7 +52,7 @@ public class EventoBean implements Serializable{
 		try {
 			Evento obj = eventos.get(0);
 			obj.setDataFim(Calendar.getInstance());
-			obj.setStatus(new Long(0));
+			obj.setStatus(new Long(1));
 			this.eventoservice.fechar(obj);
 			this.buscarEventosPorOrganizador();
 			

@@ -47,7 +47,7 @@ public class EventoService implements Serializable{
 				
 		this.organizador = organizadorDAO.buscarPeloCodigo(id);
 		evento.setOrganizador(organizador);
-		evento.setStatus(new Long(1));
+		evento.setStatus(new Long(0));
 		evento.setDataInicio(Calendar.getInstance());
 		this.eventoDAO.salvar(evento);
 		

@@ -13,6 +13,7 @@ import javax.inject.Named;
 import br.com.ruianderson.modelo.FilaNoEvento;
 import br.com.ruianderson.modelo.Participante;
 import br.com.ruianderson.service.FilaNoEventoService;
+import br.com.ruianderson.util.jsf.FacesUtil;
 
 
 @Named
@@ -28,26 +29,92 @@ public class FilaNoEventoBean implements Serializable{
 	
 	private List<FilaNoEvento> listaParaCantar;
 	
-	public void entrarNoEvento(Participante participante){
+	public void cantou(FilaNoEvento objfila){
 		
-		this.fila = new FilaNoEvento();
-		fila.setParticipante(participante);
-		fila.setCodigomusica(participante.getPrimeiramusica());
-		fila.setStatus(new Long(0));
+		if(!objfila.getParticipante().getPrimeiramusica().equals("")){
+			
+			objfila.setStatus(new Long(1));
+			objfila.setHoracantada(Calendar.getInstance());
+			
+			this.filanoeventoservice.adicionarNoEvento(objfila);
+					
+			this.entrarNoEvento(objfila.getParticipante());
+			
+		}else{
+			FacesUtil.addErrorMessage("Informe a proxima musica para "+objfila.getParticipante().getPrimeironome()+" cantar!");
+		}
+				
 		
-		this.filanoeventoservice.adicionarNoEvento(fila);
-		atualizaListaParacantar();
 		
 	}
 	
+	public void entrarNoEvento(Participante participante){
+		
+		boolean ok = false;
+		ok = validaParticipante(participante);
+		
+		if(ok){
+					
+			fila.setPosicao(new Long(0));
+			fila.setParticipante(participante);
+			fila.setCodigomusica(participante.getPrimeiramusica());
+			fila.setStatus(new Long(0));
+			
+			try {
+				
+				this.filanoeventoservice.adicionarNoEvento(fila);
+				
+				if(fila.getId()== null){
+					FacesUtil.addSuccessMessage(fila.getParticipante().getPrimeironome()+ " adicionado a fila com sucesso!");
+				}else{
+					FacesUtil.addSuccessMessage(fila.getParticipante().getPrimeironome()+ " cantou e voltou para o final da fila!");
+				}
+				
+			} catch (Exception e) {
+				FacesUtil.addErrorMessage("Erro cocluindo a operação! "+e.getMessage());
+			}
+			
+			
+			atualizaListaParacantar();
+			
+		}
+		
+	
+		
+		
+	}
+	
+	private boolean validaParticipante(Participante participante) {
+		boolean retorno = true;
+		
+		if(participante.getPrimeiramusica().equals("")){
+			FacesUtil.addErrorMessage("Informe o codigo da musica do participante "+participante.getPrimeironome()+"!");
+			retorno = false;
+		}
+		
+		if(this.filanoeventoservice.verificaParticipanteNoEvento(participante) && retorno){
+			FacesUtil.addErrorMessage("Participante "+participante.getPrimeironome()+" já esta na fila e não pode ser adicionado novamente!");
+			retorno = false;
+		}
+		
+		
+		return retorno;
+	}
+
 	@PostConstruct
 	public void init() {
-		listaParaCantar = new ArrayList<FilaNoEvento>();
-		atualizaListaParacantar();
+		//this.fila = new FilaNoEvento();
+		this.atualizaListaParacantar();
 	}
 
 	private void atualizaListaParacantar() {
-		listaParaCantar = this.filanoeventoservice.buscarFila();
+		if(this.filanoeventoservice.buscarFila()!= null){
+			this.listaParaCantar = this.filanoeventoservice.buscarFila();
+		}else{
+			this.listaParaCantar = new ArrayList<FilaNoEvento>();
+		}
+			
+		this.fila = new FilaNoEvento();
 		
 	}
 
@@ -58,6 +125,8 @@ public class FilaNoEventoBean implements Serializable{
 	public void setListaParaCantar(List<FilaNoEvento> listaParaCantar) {
 		this.listaParaCantar = listaParaCantar;
 	}
+
+	
 
 	
 	

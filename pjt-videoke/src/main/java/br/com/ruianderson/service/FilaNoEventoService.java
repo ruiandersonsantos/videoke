@@ -28,22 +28,54 @@ public class FilaNoEventoService implements Serializable{
 	
 	private Evento evento;
 	
+	@SuppressWarnings("unused")
 	@Transactional
 	public void adicionarNoEvento(FilaNoEvento fila) {
 		
-		pegarEventoPorOrganizador();
+		if(fila.getId()!=null){
+			this.filaDAO.salvar(fila);
+		}else{
+			
+			if(fila.getEvento() == null){
+				
+				this.pegarEventoPorOrganizador();
+				
+				fila.setEvento(this.evento);
+				
+			}
+			
+			Long ultimaPosicao = this.filaDAO.pegaUltimaPosicao(this.evento);
+			
+			// Se não for retornado valor do banco significa que é o primeiro da fila.
+			if (ultimaPosicao == null){
+				ultimaPosicao = new Long(1);
+			}else{
+				ultimaPosicao++;
+			}
+					
+			
+			fila.setPosicao(ultimaPosicao);
+			
+			this.filaDAO.salvar(fila);
+			
+		}
 		
-		fila.setEvento(evento);
 		
-		this.filaDAO.salvar(fila);
 		
 	}
 
 	public void pegarEventoPorOrganizador() {
 		// pegando o id do organizador
 		Long id = retornaIdOrganizador();
+		
 		// pegando o evento ativo do organizador
-		this.evento = eventoDAO.buscarEventoAtivo(id).get(0);
+		if(eventoDAO.buscarEventoAtivo(id).size()>0){
+			this.evento = eventoDAO.buscarEventoAtivo(id).get(0);
+		}else{
+			this.evento = null;
+		}
+		
+		
 	}
 	
 	private Long retornaIdOrganizador() {
@@ -57,6 +89,17 @@ public class FilaNoEventoService implements Serializable{
 		// preenche a propriedade evento
 		pegarEventoPorOrganizador();
 		
-		return this.filaDAO.buscarFilaPorEvento(this.evento);
+		if(this.evento != null){
+			return this.filaDAO.buscarFilaPorEvento(this.evento);
+		}
+		
+		return null;
+	}
+
+	public boolean verificaParticipanteNoEvento(Participante participante) {
+
+		return this.filaDAO.verificaParticipanteNoEvento(participante,this.evento);
+		
+		
 	}
 }

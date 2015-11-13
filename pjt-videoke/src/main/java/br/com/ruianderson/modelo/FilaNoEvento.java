@@ -18,7 +18,7 @@ public class FilaNoEvento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Integer posicao;
+	private Long posicao;
 	
 	private String codigomusica;
 	
@@ -73,10 +73,10 @@ public class FilaNoEvento {
 	
 	
 	
-	public Integer getPosicao() {
+	public Long getPosicao() {
 		return posicao;
 	}
-	public void setPosicao(Integer posicao) {
+	public void setPosicao(Long posicao) {
 		this.posicao = posicao;
 	}
 	@Override

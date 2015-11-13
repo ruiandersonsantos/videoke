@@ -1,6 +1,7 @@
 package br.com.ruianderson.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,10 +29,15 @@ public class EventoDAO implements Serializable{
 	
 	
 	public List<Evento> buscarEventoAtivo(Long idorganizador) {
-		return em.createQuery("select e from Evento e where e.status = :status and e.organizador.id = :id",Evento.class)
-				.setParameter("status", new Long(1))
+		
+		List<Evento> obj = new ArrayList<Evento>();
+		obj = em.createQuery("select e from Evento e where e.status = :status and e.organizador.id = :id",Evento.class)
+				.setParameter("status", new Long(0))
 				.setParameter("id", idorganizador)
 				.getResultList();
+		
+		return obj;
+			
 	}
 	
 	public Evento buscarPeloCodigo(Long codigo) {
