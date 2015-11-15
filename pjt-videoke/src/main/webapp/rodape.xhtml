@@ -35,26 +35,6 @@
 		</footer>
 	</b:container>
 
-	<h:form>
-		<p:confirmDialog global="true">
-			<p:commandButton value="Não" type="button"
-				styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-
-			<p:commandButton value="Sim" type="button"
-				styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-		</p:confirmDialog>
-
-		<p:confirmDialog id="confirmacaoFecharEvento"
-			widgetVar="confirmafecharevento" global="true"
-			message="Tem certeza que deseja fechar o Evento ? Operação não poderá ser modificada!"
-			header="Fechamento de Evento" severity="alert">
-
-			<p:commandButton value="Não"
-				onclick="confirmacaoFecharEvento.hide(); return false;" />
-			<p:commandButton value="Sim" onclick="confirmacaoFecharEvento.hide()"
-				action="#{eventoBean.fecharEvento}" />
-		</p:confirmDialog>
-	</h:form>
-
+	
 
 </html>

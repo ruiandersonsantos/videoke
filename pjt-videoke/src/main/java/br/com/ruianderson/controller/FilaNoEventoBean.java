@@ -27,7 +27,16 @@ public class FilaNoEventoBean implements Serializable{
 	
 	private FilaNoEvento fila;
 	
+	private FilaNoEvento filaselecionada;
+	
 	private List<FilaNoEvento> listaParaCantar;
+	
+	public void alterarPosicao(){
+		this.filanoeventoservice.adicionarNoEvento(filaselecionada);
+		FacesUtil.addSuccessMessage("Posição do participante "+filaselecionada.getParticipante().getPrimeironome()+ " alterada com sucesso!");
+		filaselecionada.setPosicao(null);
+		filaselecionada.setCodigomusica(null);
+	}
 	
 	public void cantou(FilaNoEvento objfila){
 		
@@ -105,6 +114,7 @@ public class FilaNoEventoBean implements Serializable{
 	public void init() {
 		//this.fila = new FilaNoEvento();
 		this.atualizaListaParacantar();
+		this.filaselecionada = new FilaNoEvento();
 	}
 
 	private void atualizaListaParacantar() {
@@ -126,8 +136,24 @@ public class FilaNoEventoBean implements Serializable{
 		this.listaParaCantar = listaParaCantar;
 	}
 
-	
+	public FilaNoEvento getFila() {
+		return fila;
+	}
 
+	public void setFila(FilaNoEvento fila) {
+		this.fila = fila;
+	}
+
+	public FilaNoEvento getFilaselecionada() {
+		return filaselecionada;
+	}
+
+	public void setFilaselecionada(FilaNoEvento filaselecionada) {
+		this.filaselecionada = filaselecionada;
+	}
+
+	
+	
 	
 	
 	

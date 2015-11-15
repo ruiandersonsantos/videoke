@@ -68,4 +68,8 @@ public class FilaNoEventoDAO implements Serializable {
 		return false;
 		
 	}
+
+	public FilaNoEvento buscarPeloCodigo(Long codigo) {
+		return em.find(FilaNoEvento.class, codigo);
+	}
 }

@@ -68,8 +68,8 @@
 										</div>
 
 										<div class="col-sm-10">
-											<p:commandButton value="Pesquisar"
-												update=":frm_buscaparticipante"
+											<p:commandButton value="Pesquisar"  disabled="#{eventoBean.eventos.size() == 0}"
+												update=":frm_buscaparticipante" icon="ui-icon-search"
 												action="#{localizarParticipanteBean.localizarParticipante}"
 												style="margin-left: 108px;" />
 										</div>
@@ -81,7 +81,7 @@
 											title="Resultado da pesquisa"
 											rendered="#{localizarParticipanteBean.listaparticipante.size()>0}">
 
-											<p:commandButton value="Limpar Pesquisa"
+											<p:commandButton value="Limpar Pesquisa" icon="ui-icon-arrowreturnthick-1-w"
 												update=":frm_buscaparticipante" process="@this"
 												action="#{localizarParticipanteBean.limparPesquisa}" />
 
@@ -114,7 +114,7 @@
 
 													<p:column headerText="Acão"
 														style="width: 80px; text-align: center">
-														<p:commandButton update=":frm_fila" 
+														<p:commandButton update=":frm_fila"
 															action="#{filaNoEventoBean.entrarNoEvento(participante)}"
 															icon="ui-icon-plusthick">
 															<f:param name="participante" value="#{participante}" />
@@ -180,9 +180,12 @@
 
 											<p:column headerText="Ação"
 												style="text-align: center; width: 20px">
-												<b:commandButton update="frm_listEvento" icon="floppy-saved"
-													action="#{eventoBean.fecharEvento}" value="Fechar"
-													styleClass="btn btn-primary btn-md" />
+												<p:commandButton  icon="ui-icon-closethick" update=":frm_listEvento"
+													actionListener="#{eventoBean.fecharEvento}" value="Fechar">
+													
+													<p:confirm header="Fechamento de Evento" message="O fechamento do evento encerrará a fila de participante, confirma essa operação?" icon="ui-icon-alert" />
+
+												</p:commandButton>
 											</p:column>
 
 										</p:dataTable>
@@ -191,6 +194,14 @@
 								</b:panel>
 							</div>
 						</div>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Sim" type="button" 
+								styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+							<p:commandButton value="Não" type="button"
+								styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						</p:confirmDialog>
+
 					</h:form>
 
 
@@ -231,19 +242,21 @@
 
 
 
-											<p:column headerText="Cantou" 
+											<p:column headerText="Cantou"
 												style="text-align: center; width: 20px;">
-												<p:commandButton icon="ui-icon-play"
-													update=":frm_fila"
+												<p:commandButton icon="ui-icon-play" update=":frm_fila"
 													action="#{filaNoEventoBean.cantou(fila)}"
 													value="#{fila.codigomusica}">
-												<f:param name="fila" value="#{fila}" />
+													<f:param name="fila" value="#{fila}" />
 												</p:commandButton>
 											</p:column>
 
 											<p:column headerText="Alterar"
 												style="text-align: center; width: 20px;">
-												<p:commandButton icon="ui-icon-pencil" />
+												<p:button icon="ui-icon-pencil" 
+													outcome="AlteraPosicao">
+													<f:param name="fila" value="#{fila.id}" />
+												</p:button>
 											</p:column>
 
 										</p:dataTable>
