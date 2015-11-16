@@ -15,6 +15,8 @@
 <!-- 	</f:facet> -->
 <!-- </p:ajaxStatus> -->
 
+
+
 <!-- Menu superior -->
 <b:navBar brand="VIDEOKE-SHOW" brandhref="index.xhtml" inverse="true">
 
@@ -24,12 +26,9 @@
 		<b:navLink value="Painel" outcome="/restrito/Home"></b:navLink>
 
 		<b:dropMenu value="Evento">
-			<b:navLink value="Cadastrar Evento"
+			<b:navLink value="Criar Evento"
 				outcome="/evento/CadastroEvento.xhtml"></b:navLink>
-			<b:navLink value="Incluir Participante" href="#"></b:navLink>
-			<b:navLink value="Fechar Evento"
-				oncomplete="confirmafecharevento.show()"></b:navLink>
-
+			
 		</b:dropMenu>
 
 		<b:dropMenu value="Participante">
@@ -40,7 +39,7 @@
 			<b:navLink value="Listagem de Participante"
 				outcome="/participante/PesquisaParticipantes.xhtml"></b:navLink>
 
-			<b:navLink value="Alterar Fila" href="#"></b:navLink>
+			
 
 		</b:dropMenu>
 

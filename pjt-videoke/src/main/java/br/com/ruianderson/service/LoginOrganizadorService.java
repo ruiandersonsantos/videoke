@@ -38,6 +38,7 @@ public class LoginOrganizadorService implements Serializable{
 	public void sairSistema() {
 		// Retirando usuario logado da sessão
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuariologado", null);
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 					
 	}
 }

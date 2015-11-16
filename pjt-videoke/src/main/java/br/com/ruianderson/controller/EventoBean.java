@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -28,7 +29,7 @@ public class EventoBean implements Serializable{
 	private Evento evento;
 	private List<Evento> eventos = new ArrayList<>();
 	
-	
+		
 	public String salvar() {
 			
 		try {
