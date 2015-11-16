@@ -12,7 +12,7 @@ import br.com.ruianderson.dao.FilaNoEventoDAO;
 import br.com.ruianderson.dao.OrganizadorDAO;
 import br.com.ruianderson.modelo.Evento;
 import br.com.ruianderson.modelo.FilaNoEvento;
-import br.com.ruianderson.modelo.LoginOrganizador;
+import br.com.ruianderson.modelo.Login;
 import br.com.ruianderson.modelo.Participante;
 import br.com.ruianderson.util.jpa.Transactional;
 
@@ -79,8 +79,8 @@ public class FilaNoEventoService implements Serializable{
 	}
 	
 	private Long retornaIdOrganizador() {
-		LoginOrganizador loginOrganizador  = (LoginOrganizador) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuariologado");
-		Long id = loginOrganizador.getOrganizador().getId();
+		Login login  = (Login) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuariologado");
+		Long id = login.getOrganizador().getId();
 		return id;
 	}
 

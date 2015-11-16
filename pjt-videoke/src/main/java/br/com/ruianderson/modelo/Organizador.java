@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +24,9 @@ public class Organizador {
 	private String email;
 	private String senha;
 	private Date dataNascimento;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoUsuario tipousuario;
 	
 
 	
@@ -67,6 +72,12 @@ public class Organizador {
 	
 	
 	
+	public TipoUsuario getTipousuario() {
+		return tipousuario;
+	}
+	public void setTipousuario(TipoUsuario tipousuario) {
+		this.tipousuario = tipousuario;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

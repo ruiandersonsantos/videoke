@@ -12,24 +12,24 @@ import javax.inject.Named;
 
 import br.com.ruianderson.dao.EventoDAO;
 import br.com.ruianderson.modelo.Evento;
-import br.com.ruianderson.modelo.LoginOrganizador;
-import br.com.ruianderson.service.LoginOrganizadorService;
+import br.com.ruianderson.modelo.Login;
+import br.com.ruianderson.service.LoginService;
 import br.com.ruianderson.service.NegocioException;
 import br.com.ruianderson.util.cdi.CDIServiceLocator;
 import br.com.ruianderson.util.jsf.FacesUtil;
 
 @ManagedBean
 @SessionScoped
-public class LoginOrganizadorBean implements Serializable{
+public class LoginBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private LoginOrganizadorService loginservice;
+	private LoginService loginservice;
 	
-	private LoginOrganizador login;
+	private Login login;
 	
-	public LoginOrganizadorBean(){
-		this.loginservice = CDIServiceLocator.getBean(LoginOrganizadorService.class);
+	public LoginBean(){
+		this.loginservice = CDIServiceLocator.getBean(LoginService.class);
 	}
 	
 	public String logar(){
@@ -50,7 +50,7 @@ public class LoginOrganizadorBean implements Serializable{
 	}
 	
 	public String sair(){
-		LoginOrganizador login = (LoginOrganizador) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuariologado");
+		Login login = (Login) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuariologado");
 		this.loginservice.sairSistema();
 		
 		FacesUtil.addSuccessMessage("Obrigado por usr nosso sistema!");
@@ -68,14 +68,14 @@ public class LoginOrganizadorBean implements Serializable{
 	}
 
 	private void limpar() {
-		this.login = new LoginOrganizador();	
+		this.login = new Login();	
 	}
 
-	public LoginOrganizador getLogin() {
+	public Login getLogin() {
 		return login;
 	}
 
-	public void setLogin(LoginOrganizador login) {
+	public void setLogin(Login login) {
 		this.login = login;
 	}
 	

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.ruianderson.modelo.Participante;
+import br.com.ruianderson.modelo.TipoUsuario;
 import br.com.ruianderson.service.NegocioException;
 import br.com.ruianderson.service.ParticipanteService;
 import br.com.ruianderson.util.jsf.FacesUtil;
@@ -26,6 +27,7 @@ public class ParticipanteBean implements Serializable{
 	
 	public void salvar() {
 		try {
+			participante.setTipousuario(TipoUsuario.PARTICIPANTE);
 			this.participanteService.salvar(participante);
 			FacesUtil.addSuccessMessage("Participante salvo com sucesso!");
 			

@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import br.com.ruianderson.dao.EventoDAO;
 import br.com.ruianderson.dao.OrganizadorDAO;
 import br.com.ruianderson.modelo.Evento;
-import br.com.ruianderson.modelo.LoginOrganizador;
+import br.com.ruianderson.modelo.Login;
 import br.com.ruianderson.modelo.Organizador;
 import br.com.ruianderson.util.jpa.Transactional;
 
@@ -55,8 +55,8 @@ public class EventoService implements Serializable{
 
 
 	private Long retornaIdOrganizador() {
-		LoginOrganizador loginOrganizador  = (LoginOrganizador) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuariologado");
-		Long id = loginOrganizador.getOrganizador().getId();
+		Login login  = (Login) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuariologado");
+		Long id = login.getOrganizador().getId();
 		return id;
 	}
 

@@ -12,7 +12,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-public class LoginOrganizador {
+public class Login {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,7 +76,7 @@ public class LoginOrganizador {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LoginOrganizador other = (LoginOrganizador) obj;
+		Login other = (Login) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -58,19 +58,19 @@
 		<div class="form-group">
 			`
 			<b:inputText placeholder="Email" fieldSize="sm"
-				value="#{loginOrganizadorBean.login.email}" />
+				value="#{loginBean.login.email}" />
 		</div>
 		<div class="form-group">
 			<b:inputSecret placeholder="Senha" fieldSize="sm"
-				value="#{loginOrganizadorBean.login.senha}" />
-		</div> #{' '} <b:commandButton action="#{loginOrganizadorBean.logar}"
+				value="#{loginBean.login.senha}" />
+		</div> #{' '} <b:commandButton action="#{loginBean.logar}"
 			value="Logar" look="success" icon="chevron-right" iconAlign="right" />
 	</h:form>
 	
 	<h:form styleClass="navbar-form navbar-right"
 		rendered="#{sessionScope.usuariologado != null}">
 		
-		<b:commandButton action="#{loginOrganizadorBean.sair}"
+		<b:commandButton action="#{loginBean.sair}"
 			value="Sair" look="danger" icon="chevron-right" iconAlign="right" />
 	</h:form>
 	

@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.ruianderson.modelo.LoginOrganizador;
+import br.com.ruianderson.modelo.Login;
 
 /**
  * Servlet Filter implementation class Filtro
@@ -42,7 +42,7 @@ public class Filtro implements Filter {
 		 HttpServletRequest req = (HttpServletRequest) request;
 	     HttpServletResponse res = (HttpServletResponse) response;
 	        
-	        LoginOrganizador usrfil  = (LoginOrganizador) req.getSession().getAttribute("usuariologado");
+	        Login usrfil  = (Login) req.getSession().getAttribute("usuariologado");
 	        
 	        if(usrfil != null){
 	            

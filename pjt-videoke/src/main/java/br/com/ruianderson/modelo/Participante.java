@@ -3,6 +3,8 @@ package br.com.ruianderson.modelo;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,9 +28,12 @@ public class Participante {
 	private Integer celular;
 	private String senha;
 	private Date dataNascimento;
+	
 	@Transient
 	private String primeiramusica;
 	
+	@Enumerated(EnumType.STRING)
+	private TipoUsuario tipousuario;
 	
 	
 	public Long getId() {
@@ -77,16 +82,22 @@ public class Participante {
 	public void setCelular(Integer celular) {
 		this.celular = celular;
 	}
+		
 	
-	
-	
-	
+	public TipoUsuario getTipousuario() {
+		return tipousuario;
+	}
+	public void setTipousuario(TipoUsuario tipousuario) {
+		this.tipousuario = tipousuario;
+	}
 	public String getPrimeiramusica() {
 		return primeiramusica;
 	}
 	public void setPrimeiramusica(String primeiramusica) {
 		this.primeiramusica = primeiramusica;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -5,13 +5,13 @@ import java.io.Serializable;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import br.com.ruianderson.modelo.LoginOrganizador;
+import br.com.ruianderson.modelo.Login;
 import br.com.ruianderson.modelo.Organizador;
 import br.com.ruianderson.modelo.Participante;
 import br.com.ruianderson.service.NegocioException;
 import br.com.ruianderson.util.jpa.Transactional;
 
-public class LoginOrganizadorDAO implements Serializable{
+public class LoginDAO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Inject
@@ -34,11 +34,11 @@ public class LoginOrganizadorDAO implements Serializable{
 	}
 	
 	@Transactional
-	public void salvarLogin(LoginOrganizador login) {
+	public void salvarLogin(Login login) {
 		em.merge(login);
 	}
 
-	public LoginOrganizador buscarPorId(Long id) {
-		return em.find(LoginOrganizador.class, id);
+	public Login buscarPorId(Long id) {
+		return em.find(Login.class, id);
 	}
 }

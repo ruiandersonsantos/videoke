@@ -6,19 +6,19 @@ import java.util.Calendar;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import br.com.ruianderson.dao.LoginOrganizadorDAO;
-import br.com.ruianderson.modelo.LoginOrganizador;
+import br.com.ruianderson.dao.LoginDAO;
+import br.com.ruianderson.modelo.Login;
 import br.com.ruianderson.modelo.Organizador;
 
-public class LoginOrganizadorService implements Serializable{
+public class LoginService implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	@Inject
-	private LoginOrganizadorDAO loginDAO;
+	private LoginDAO loginDAO;
 	
 	
 	
-	public void autenticar(LoginOrganizador login) throws NegocioException{
+	public void autenticar(Login login) throws NegocioException{
 		Organizador organizador = null;
 		organizador = loginDAO.autenticar(login.getEmail(), login.getSenha());
 		

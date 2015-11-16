@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.ruianderson.modelo.Organizador;
+import br.com.ruianderson.modelo.TipoUsuario;
 import br.com.ruianderson.service.NegocioException;
 import br.com.ruianderson.service.OrganizadorService;
 import br.com.ruianderson.util.jsf.FacesUtil;
@@ -25,6 +26,7 @@ public class OrganizadorBean implements Serializable{
 	
 	public void salvar() {
 		try {
+			organizador.setTipousuario(TipoUsuario.ORGANIZADOR);
 			this.organizadorService.salvar(organizador);
 			FacesUtil.addSuccessMessage("Organizador salvo com sucesso!");
 			
