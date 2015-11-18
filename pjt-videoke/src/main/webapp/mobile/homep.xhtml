@@ -8,15 +8,15 @@
 
 <h:head>
 	<title>Videoke</title>
-	<meta name="viewport" content="width=device-width" />
+	<meta name="viewport" content="width=device-width"/>
 	
-	<link rel="stylesheet"href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		
-	<script	src="js/jquery.min.js" type="text/javascript"></script>
+	<script	src="js/jquery.min.js" type="text/javascript"/>
 	
-	<script	src="src/main/webapp/mobile/js/bootstrap.min.js" type="text/javascript"></script>
+	<script	src="js/bootstrap.min.js" type="text/javascript"/>
 		
-	<link rel="stylesheet"href="css/customizado.css" />	
+	<link rel="stylesheet" href="css/customizado.css"/>	
 	
 </h:head>
 
@@ -26,6 +26,8 @@
 		<ui:include src="topop.xhtml" />
 		
 		<!-- conteudo começa aqui -->
+		<h:outputText value="Seja bem vindo #{sessionScope.usuariologado.participante.primeironome}!"/>
+		
 		
 		
 		<ui:include src="noticiasp.xhtml" />

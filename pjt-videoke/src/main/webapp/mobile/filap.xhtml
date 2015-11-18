@@ -10,13 +10,13 @@
 	<title>Videoke</title>
 	<meta name="viewport" content="width=device-width" />
 	
-	<link rel="stylesheet"href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
 		
-	<script	src="js/jquery.min.js" type="text/javascript"></script>
+	<script	src="js/jquery.min.js" type="text/javascript"/>
 	
-	<script	src="src/main/webapp/mobile/js/bootstrap.min.js" type="text/javascript"></script>
+	<script	src="js/bootstrap.min.js" type="text/javascript"/>
 		
-	<link rel="stylesheet"href="css/customizado.css" />	
+	<link rel="stylesheet" href="css/customizado.css" />	
 	
 </h:head>
 
@@ -26,6 +26,17 @@
 		<ui:include src="topop.xhtml" />
 		
 		<!-- conteudo começa aqui -->
+		<!-- Painel com os eventos ativos -->
+		<div class="panel panel-default">
+          <div class="panel-heading">
+          	<STRONG style="color:white; font-weight: bold;">Evento ativos</STRONG>
+          </div>
+          <div class="panel-body">
+          	Colocar o datatable aqui
+          </div>
+          
+        </div>
+		
 		
 		
 		<ui:include src="noticiasp.xhtml" />

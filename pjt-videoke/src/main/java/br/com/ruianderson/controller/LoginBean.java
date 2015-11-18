@@ -13,6 +13,7 @@ import javax.inject.Named;
 import br.com.ruianderson.dao.EventoDAO;
 import br.com.ruianderson.modelo.Evento;
 import br.com.ruianderson.modelo.Login;
+import br.com.ruianderson.modelo.Participante;
 import br.com.ruianderson.service.LoginService;
 import br.com.ruianderson.service.NegocioException;
 import br.com.ruianderson.util.cdi.CDIServiceLocator;
@@ -52,12 +53,13 @@ public class LoginBean implements Serializable{
 	public String logarParticipante(){
 		try {
 						
-			this.loginservice.autenticarParticipante(login);
+			Participante obj = this.loginservice.autenticarParticipante(login);
+			login.setParticipante(obj);
 			// Colocando usuario logado na sessão
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuariologado", login);
 			
-			FacesUtil.addSuccessMessage("Usuario logado com sucesso!");
-			return "";
+			//FacesUtil.addSuccessMessage("Usuario logado com sucesso!");
+			return "/mobile/homep.xhtml?faces-redirect=true";
 			
 			
 		} catch (NegocioException e) {

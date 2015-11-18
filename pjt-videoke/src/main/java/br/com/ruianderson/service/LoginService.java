@@ -35,18 +35,23 @@ public class LoginService implements Serializable{
 	}
 	
 	
-	public void autenticarParticipante(Login login) throws NegocioException{
+	public Participante autenticarParticipante(Login login) throws NegocioException{
 		Participante participante = null;
 		participante = loginDAO.autenticarParticipante(login.getEmail(), login.getSenha());
 		
 		if(participante == null){
+			login.setParticipante(participante);
 			throw new NegocioException("Login e/ou senha incorreto!");
+		}else{
+			login.setEntradaNoSistema(Calendar.getInstance());
+			
+			
+			loginDAO.salvarLogin(login);
+			
+			return participante;
 		}
 		
-		login.setEntradaNoSistema(Calendar.getInstance());
 		
-		
-		loginDAO.salvarLogin(login);
 		
 	}
 

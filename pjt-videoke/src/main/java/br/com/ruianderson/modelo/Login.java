@@ -24,6 +24,10 @@ public class Login {
 	@ManyToOne
 	private Organizador organizador;
 	
+	
+	@ManyToOne
+	private Participante participante;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar entradaNoSistema;
 	
@@ -61,6 +65,14 @@ public class Login {
 	}
 	
 	
+	
+	
+	public Participante getParticipante() {
+		return participante;
+	}
+	public void setParticipante(Participante participante) {
+		this.participante = participante;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
