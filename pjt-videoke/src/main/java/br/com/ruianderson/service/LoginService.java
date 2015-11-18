@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import br.com.ruianderson.dao.LoginDAO;
 import br.com.ruianderson.modelo.Login;
 import br.com.ruianderson.modelo.Organizador;
+import br.com.ruianderson.modelo.Participante;
 
 public class LoginService implements Serializable{
 	
@@ -18,7 +19,7 @@ public class LoginService implements Serializable{
 	
 	
 	
-	public void autenticar(Login login) throws NegocioException{
+	public void autenticarOrganizador(Login login) throws NegocioException{
 		Organizador organizador = null;
 		organizador = loginDAO.autenticar(login.getEmail(), login.getSenha());
 		
@@ -26,6 +27,22 @@ public class LoginService implements Serializable{
 			throw new NegocioException("Login e/ou senha incorreto!");
 		}
 		login.setOrganizador(organizador);
+		login.setEntradaNoSistema(Calendar.getInstance());
+		
+		
+		loginDAO.salvarLogin(login);
+		
+	}
+	
+	
+	public void autenticarParticipante(Login login) throws NegocioException{
+		Participante participante = null;
+		participante = loginDAO.autenticarParticipante(login.getEmail(), login.getSenha());
+		
+		if(participante == null){
+			throw new NegocioException("Login e/ou senha incorreto!");
+		}
+		
 		login.setEntradaNoSistema(Calendar.getInstance());
 		
 		

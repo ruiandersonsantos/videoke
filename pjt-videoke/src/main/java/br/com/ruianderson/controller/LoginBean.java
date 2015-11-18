@@ -35,12 +35,29 @@ public class LoginBean implements Serializable{
 	public String logar(){
 		try {
 						
-			this.loginservice.autenticar(login);
+			this.loginservice.autenticarOrganizador(login);
 			// Colocando usuario logado na sessão
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuariologado", login);
 			
 			FacesUtil.addSuccessMessage("Organizador logado com sucesso!");
 			return "/restrito/Home.xhtml?faces-redirect=true";
+			
+			
+		} catch (NegocioException e) {
+			FacesUtil.addErrorMessage(e.getMessage());
+			return null;
+		}
+	}
+	
+	public String logarParticipante(){
+		try {
+						
+			this.loginservice.autenticarParticipante(login);
+			// Colocando usuario logado na sessão
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuariologado", login);
+			
+			FacesUtil.addSuccessMessage("Usuario logado com sucesso!");
+			return "";
 			
 			
 		} catch (NegocioException e) {
