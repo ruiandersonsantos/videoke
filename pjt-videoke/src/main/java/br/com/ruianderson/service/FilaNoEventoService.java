@@ -102,4 +102,11 @@ public class FilaNoEventoService implements Serializable{
 		
 		
 	}
+
+	public List<FilaNoEvento> buscarFilaParticipante(Evento evento2) {
+		// TODO Auto-generated method stub
+		return this.filaDAO.buscarFilaPorEvento(evento2);
+	}
+
+	
 }
