@@ -56,14 +56,32 @@ public class EventoService implements Serializable{
 
 	private Long retornaIdOrganizador() {
 		Login login  = (Login) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuariologado");
-		Long id = login.getOrganizador().getId();
+		if(login != null){
+			Long id = login.getOrganizador().getId();
+			return id;
+		}
+		return null;
+	}
+	
+	private Long retornaIdParticipante() {
+		Login login  = (Login) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuariologado");
+		Long id = login.getParticipante().getId();
 		return id;
 	}
 
 
 	public List<Evento> buscarEventoAberto() {
 		Long id = retornaIdOrganizador();
-		return eventoDAO.buscarEventoAtivo(id);
+		if(id != null){
+			return eventoDAO.buscarEventoAtivo(id);
+		}
+		
+		return null;
+	}
+	
+	public List<Evento> buscarEventoParticipante() {
+		Long id = retornaIdParticipante();
+		return eventoDAO.buscarEventoAtivoParticipante(id);
 	}
 
 }

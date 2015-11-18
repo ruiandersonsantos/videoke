@@ -29,7 +29,7 @@ public class EventoBean implements Serializable{
 	private Evento evento;
 	private List<Evento> eventos = new ArrayList<>();
 	
-		
+
 	public String salvar() {
 			
 		try {
@@ -70,6 +70,7 @@ public class EventoBean implements Serializable{
 	public void init() {
 		this.limpar();
 		this.buscarEventosPorOrganizador();
+		
 	}
 
 	private void limpar() {

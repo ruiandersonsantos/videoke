@@ -9,40 +9,59 @@
 <h:head>
 	<title>Videoke</title>
 	<meta name="viewport" content="width=device-width" />
-	
+
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
-		
-	<script	src="js/jquery.min.js" type="text/javascript"/>
-	
-	<script	src="js/bootstrap.min.js" type="text/javascript"/>
-		
-	<link rel="stylesheet" href="css/customizado.css" />	
-	
+
+	<script src="js/jquery.min.js" type="text/javascript" />
+
+	<script src="js/bootstrap.min.js" type="text/javascript" />
+
+	<link rel="stylesheet" href="css/customizado.css" />
+
 </h:head>
 
 <h:body>
 	<div class="container">
-	
+
 		<ui:include src="topop.xhtml" />
-		
+
 		<!-- conteudo começa aqui -->
 		<!-- Painel com os eventos ativos -->
 		<div class="panel panel-default">
-          <div class="panel-heading">
-          	<STRONG style="color:white; font-weight: bold;">Evento ativos</STRONG>
-          </div>
-          <div class="panel-body">
-          	Colocar o datatable aqui
-          </div>
-          
-        </div>
-		
-		
-		
+			<div class="panel-heading">
+				<STRONG style="color: white; font-weight: bold;">Evento
+					ativos</STRONG>
+			</div>
+			<div class="panel-body">
+				<p:dataTable id="EventoTable"
+					styleClass="table table-bordered table-striped table-hover table-condensed"
+					value="#{eventoBeanParticipante.eventosParticipante}" var="evento" style="margin-top: 10px"
+					emptyMessage="Nenhum evento aberto.">
+
+				
+					<p:column headerText="Descrição" style=" width: 10px">
+						<h:outputText value="#{evento.descricao}" />
+					</p:column>
+
+					<p:column headerText="Abertura" style=" width: 5px">
+						<h:outputText id="dataAbertura" value="#{evento.dataInicio.time}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+
+
+
+				</p:dataTable>
+			</div>
+
+		</div>
+
+
+
 		<ui:include src="noticiasp.xhtml" />
 		<ui:include src="rodapep.xhtml" />
-		
-		
+
+
 	</div>
 	<!-- /container -->
 </h:body>
