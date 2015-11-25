@@ -21,7 +21,7 @@ public class LoginService implements Serializable{
 	
 	public void autenticarOrganizador(Login login) throws NegocioException{
 		Organizador organizador = null;
-		organizador = loginDAO.autenticar(login.getEmail(), login.getSenha());
+		organizador = loginDAO.autenticar(login.getEmail().trim(), login.getSenha().trim());
 		
 		if(organizador == null){
 			throw new NegocioException("Login e/ou senha incorreto!");

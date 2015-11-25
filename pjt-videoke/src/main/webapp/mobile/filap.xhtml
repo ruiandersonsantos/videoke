@@ -29,69 +29,76 @@
 		<!-- Painel com os eventos ativos -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<STRONG style="color: white; font-weight: bold;">Evento
+				<STRONG style="color: white; font-weight: bold;">Eventos
 					ativos</STRONG>
 			</div>
 			<div class="panel-body">
 				<h:form id="frm_filap">
-					<p:dataTable id="EventoTable" reflow="true"
-						styleClass="table table-bordered table-striped table-hover table-condensed"
-						value="#{eventoBeanParticipante.eventosParticipante}" var="evento"
-						style="margin-top: 10px" emptyMessage="Nenhum evento aberto.">
+					<div class="row-fluid">
+						<div class="col-sm-12">
+							<p:dataTable id="EventoTable"
+								styleClass="table table-bordered table-striped table-hover table-condensed"
+								value="#{eventoBeanParticipante.eventosParticipante}"
+								var="evento" style="margin-top: 10px"
+								emptyMessage="Nenhum evento aberto.">
 
 
-						<p:column headerText="Descrição" style=" width: 20px">
-							<h:outputText value="#{evento.descricao}" />
-						</p:column>
+								<p:column headerText="Descrição" style=" width: 20px">
+									<h:outputText value="#{evento.descricao}" />
+								</p:column>
 
-						<p:column headerText="Abertura"
-							style=" width: 20px; text-align: center;">
-							<h:outputText id="dataAbertura" value="#{evento.dataInicio.time}">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:outputText>
-						</p:column>
+								<p:column headerText="Abertura"
+									style=" width: 20px; text-align: center;">
+									<h:outputText id="dataAbertura"
+										value="#{evento.dataInicio.time}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</p:column>
 
 
-						<p:column headerText="Fila"
-							style=" width: 5px; text-align: center;">
-							<p:commandButton icon="ui-icon-clipboard" update=":frm_filap"
-								action="#{filaParticipanteBean.buscarFilaDoParticipante(evento)}">
-								<f:param name="evento" value="#{evento}" />
-							</p:commandButton>
-						</p:column>
+								<p:column headerText="Fila"
+									style=" width: 5px; text-align: center;">
+									<p:commandButton icon="ui-icon-clipboard" update=":frm_filap"
+										action="#{filaParticipanteBean.buscarFilaDoParticipante(evento)}">
+										<f:param name="evento" value="#{evento}" />
+									</p:commandButton>
+								</p:column>
 
-					</p:dataTable>
-
+							</p:dataTable>
+						</div>
+					</div>
 
 					<!-- dataTable da fila -->
-					<p:dataTable id="filaTable" reflow="true" rendered="#{filaParticipanteBean.listaParaCantar.size() > 0}"
-						styleClass="table table-bordered table-striped table-hover table-condensed"
-						value="#{filaParticipanteBean.listaParaCantar}" var="fila"
-						rows="5" paginator="true" paginatorAlwaysVisible="false"
-						paginatorPosition="bottom"
-						style="margin-top: 10px">
+					<div class="row-fluid">
+						<div class="col-sm-12">
+							<p:dataTable id="filaTable"
+								rendered="#{filaParticipanteBean.listaParaCantar.size() > 0}"
+								styleClass="table table-bordered table-striped table-hover table-condensed"
+								value="#{filaParticipanteBean.listaParaCantar}" var="fila"
+								rows="5" paginator="true" paginatorAlwaysVisible="false"
+								paginatorPosition="bottom" style="margin-top: 10px">
 
 
-						<p:column headerText="Posição"
-							style=" width: 2px; text-align: center;">
-							<h:outputText value="#{fila.posicao}" />
-						</p:column>
+								<p:column headerText="Posição"
+									style=" width: 2px; text-align: center;">
+									<h:outputText value="#{fila.posicao}" />
+								</p:column>
 
-						<p:column headerText="Participante" style=" width: 20px">
-							<h:outputText value="#{fila.participante.primeironome}" 
-							
-								style="#{fila.participante.id == sessionScope.usuariologado.participante.id ? 'background: #FFA07A;' : ''}"
-							/>
-						</p:column>
+								<p:column headerText="Participante" style=" width: 20px">
+									<h:outputText value="#{fila.participante.primeironome}"
+										style="#{fila.participante.id == sessionScope.usuariologado.participante.id ? 'background: #FFA07A;' : ''}" />
+								</p:column>
 
-						<p:column headerText="Musica"
-							style=" width: 5px; text-align: center">
-							<h:outputText value="#{fila.codigomusica}" />
-						</p:column>
+								<p:column headerText="Musica"
+									style=" width: 5px; text-align: center">
+									<h:outputText value="#{fila.codigomusica}" />
+								</p:column>
 
 
 
-					</p:dataTable>
+							</p:dataTable>
+						</div>
+					</div>
 
 				</h:form>
 			</div>
