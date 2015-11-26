@@ -27,84 +27,107 @@
 
 		<!-- conteudo começa aqui -->
 		<!-- Painel com os eventos ativos -->
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<STRONG style="color: white; font-weight: bold;">Eventos
-					ativos</STRONG>
-			</div>
-			<div class="panel-body">
-				<h:form id="frm_filap">
-					<div class="row-fluid">
-						<div class="col-sm-12">
-							<p:dataTable id="EventoTable"
-								styleClass="table table-bordered table-striped table-hover table-condensed"
-								value="#{eventoBeanParticipante.eventosParticipante}"
-								var="evento" style="margin-top: 10px"
-								emptyMessage="Nenhum evento aberto.">
+
+		<h:form id="frm_filap">
+			<p:dataTable id="EventoTable"
+				styleClass="table table-bordered table-striped table-hover table-condensed"
+				value="#{eventoBeanParticipante.eventosParticipante}" var="evento"
+				style="margin-top: 10px" emptyMessage="Nenhum evento aberto.">
 
 
-								<p:column headerText="Descrição" style=" width: 20px">
-									<h:outputText value="#{evento.descricao}" />
-								</p:column>
+				<p:column headerText="Descrição" style=" width: 20px">
+					<h:outputText value="#{evento.descricao}" />
+				</p:column>
 
-								<p:column headerText="Abertura"
-									style=" width: 20px; text-align: center;">
-									<h:outputText id="dataAbertura"
-										value="#{evento.dataInicio.time}">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:outputText>
-								</p:column>
-
-
-								<p:column headerText="Fila"
-									style=" width: 5px; text-align: center;">
-									<p:commandButton icon="ui-icon-clipboard" update=":frm_filap"
-										action="#{filaParticipanteBean.buscarFilaDoParticipante(evento)}">
-										<f:param name="evento" value="#{evento}" />
-									</p:commandButton>
-								</p:column>
-
-							</p:dataTable>
-						</div>
-					</div>
-
-					<!-- dataTable da fila -->
-					<div class="row-fluid">
-						<div class="col-sm-12">
-							<p:dataTable id="filaTable"
-								rendered="#{filaParticipanteBean.listaParaCantar.size() > 0}"
-								styleClass="table table-bordered table-striped table-hover table-condensed"
-								value="#{filaParticipanteBean.listaParaCantar}" var="fila"
-								rows="5" paginator="true" paginatorAlwaysVisible="false"
-								paginatorPosition="bottom" style="margin-top: 10px">
+				<p:column headerText="Abertura"
+					style=" width: 20px; text-align: center;">
+					<h:outputText id="dataAbertura" value="#{evento.dataInicio.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
 
 
-								<p:column headerText="Posição"
-									style=" width: 2px; text-align: center;">
-									<h:outputText value="#{fila.posicao}" />
-								</p:column>
+				<p:column headerText="Fila" style=" width: 5px; text-align: center;">
+					<p:commandButton icon="ui-icon-clipboard" update=":frm_filap"
+						action="#{filaParticipanteBean.buscarFilaDoParticipante(evento)}">
+						<f:param name="evento" value="#{evento}" />
+					</p:commandButton>
+				</p:column>
+				
+				<p:column headerText="Cantou" style=" width: 5px; text-align: center;">
+					<p:commandButton icon="ui-icon-info" update=":frm_filap"
+						action="#{filaParticipanteBean.buscarMuscasCantadas(evento)}">
+						<f:param name="evento" value="#{evento}" />
+					</p:commandButton>
+				</p:column>
 
-								<p:column headerText="Participante" style=" width: 20px">
-									<h:outputText value="#{fila.participante.primeironome}"
-										style="#{fila.participante.id == sessionScope.usuariologado.participante.id ? 'background: #FFA07A;' : ''}" />
-								</p:column>
+			</p:dataTable>
+			
+			<h3>
+				<h:outputLabel value="Musicas cantadas" rendered="#{filaParticipanteBean.musicasCantadas.size() > 0}"/>
+				<h:outputLabel value="Fila de Participantes" rendered="#{filaParticipanteBean.listaParaCantar.size() > 0}"/>
+			</h3>
 
-								<p:column headerText="Musica"
-									style=" width: 5px; text-align: center">
-									<h:outputText value="#{fila.codigomusica}" />
-								</p:column>
+			<!-- dataTable da fila -->
+			<p:dataTable id="filaTable"
+				rendered="#{filaParticipanteBean.listaParaCantar.size() > 0}"
+				styleClass="table table-bordered table-striped table-hover table-condensed"
+				value="#{filaParticipanteBean.listaParaCantar}" var="fila" rows="10"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" style="margin-top: 10px">
+
+
+				<p:column headerText="Posição"
+					style=" width: 2px; text-align: center;">
+					<h:outputText value="#{fila.posicao}" />
+				</p:column>
+
+				<p:column headerText="Participante" style=" width: 20px">
+					<h:outputText value="#{fila.participante.primeironome}"
+						style="#{fila.participante.id == sessionScope.usuariologado.participante.id ? 'background: #FFA07A;' : ''}" />
+				</p:column>
+
+				<p:column headerText="Musica"
+					style=" width: 5px; text-align: center">
+					<h:outputText value="#{fila.codigomusica}" />
+				</p:column>
 
 
 
-							</p:dataTable>
-						</div>
-					</div>
+			</p:dataTable>
+			
+			
+			<!-- dataTable das musicas cantas -->
+			<p:dataTable id="musicaTable"
+				rendered="#{filaParticipanteBean.musicasCantadas.size() > 0}"
+				styleClass="table table-bordered table-striped table-hover table-condensed"
+				value="#{filaParticipanteBean.musicasCantadas}" var="musica" rows="20"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" style="margin-top: 10px">
 
-				</h:form>
-			</div>
 
-		</div>
+				<p:column headerText="Musica"
+					style=" width: 2px; text-align: center;">
+					<h:outputText value="#{musica.codigomusica}" />
+				</p:column>
 
+				<p:column headerText="Participante" style=" width: 20px">
+					<h:outputText value="#{musica.participante.primeironome}"
+						style="#{musica.participante.id == sessionScope.usuariologado.participante.id ? 'background: #FFA07A;' : ''}" />
+				</p:column>
+
+				<p:column headerText="Horario"
+					style=" width: 5px; text-align: center">
+					<h:outputText value="#{musica.horacantada.time}" >
+						<f:convertDateTime pattern="HH:mm:ss" timeZone="America/Sao_Paulo"/> 
+					</h:outputText>
+				</p:column>
+
+
+
+			</p:dataTable>
+
+		</h:form>
 
 
 		<ui:include src="noticiasp.xhtml" />

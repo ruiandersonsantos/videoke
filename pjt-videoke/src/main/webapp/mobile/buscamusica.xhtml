@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -6,7 +7,10 @@
 	xmlns:o="http://omnifaces.org/ui" xmlns:p="http://primefaces.org/ui"
 	xmlns:b="http://bootsfaces.net/ui">
 
+
+
 <h:head>
+
 	<title>Videoke</title>
 	<meta name="viewport" content="width=device-width" />
 
@@ -18,68 +22,69 @@
 
 	<link rel="stylesheet" href="css/customizado.css" />
 
-	
-
 </h:head>
 
 <h:body>
-	<div class="container">
+	<f:view encoding="ISO-8859-1">
+		<div class="container">
 
-		<ui:include src="topop.xhtml" />
+			<ui:include src="topop.xhtml" />
 
-		<!-- conteudo começa aqui -->
-		 <p:growl id="message" autoUpdate="true"/>
+			<!-- conteudo começa aqui -->
+			<p:messages id="message" autoUpdate="true" />
 
-		<h:form styleClass="form-signin">
-			<h2 class="form-signin-heading">Catálogo Eletrônico</h2>
-			<p:inputText value="#{musicaBean.titulo}" type="text"
-				styleClass="form-control" placeholder="Titulo da Musica" />
+			<h:form id="frm_buscamusica">
+				<h2 class="form-signin-heading">Catálogo Eletrônico</h2>
+				<p:inputText value="#{musicaBean.titulo}" type="text"
+					styleClass="form-control" placeholder="Titulo da Musica" />
 
-			<p:inputText value="#{musicaBean.cantor}" type="text"
-				styleClass="form-control" placeholder="Cantor" />
+				<p:inputText value="#{musicaBean.cantor}" type="text"
+					styleClass="form-control" placeholder="Cantor" />
 
-			<p:inputText value="#{musicaBean.codigo}" type="text"
-				styleClass="form-control" placeholder="Codigo da Musica" />
+				<p:inputText value="#{musicaBean.codigo}" type="text"
+					styleClass="form-control" placeholder="Codigo da Musica" />
 
+				<b:commandButton action="#{musicaBean.buscarMusica}" 
+					update=":musicaTable"
+					value="Pesquisar" styleClass="btn btn-lg btn-primary btn-block" />
 
-			<h:commandButton action="#{musicaBean.buscarMusica}"
-				value="Pesquisar" styleClass="btn btn-lg btn-primary btn-block" />
-
-		</h:form>
-
-
-		<!-- Painel com o resultado da pesquisa -->
-
-		<p:dataTable id="MusicaTable" rendered="#{musicaBean.musicas.size() > 0}"
-			styleClass="table table-bordered table-striped table-hover table-condensed"
-			value="#{musicaBean.musicas}" var="musica" style="margin-top: 10px"
-			emptyMessage="Nenhuma musica encontrada.">
+			</h:form>
 
 
-			<p:column headerText="Codigo" style=" width: 5px">
-				<h:outputText value="#{musica.codigo}" />
-			</p:column>
+			<!-- Painel com o resultado da pesquisa -->
 
-			<p:column headerText="Musica" style=" width: 20px">
-				<h:outputText value="#{musica.titulo}" />
-			</p:column>
-
-			<p:column headerText="Cantor" style=" width: 20px">
-				<h:outputText value="#{musica.cantor}" />
-			</p:column>
-
-		</p:dataTable>
+			<p:dataTable id="musicaTable"
+				rendered="#{musicaBean.musicas.size() > 0}"
+				styleClass="table table-bordered table-striped table-hover table-condensed"
+				value="#{musicaBean.musicas}" var="musica" style="margin-top: 10px"
+				emptyMessage="Nenhuma musica encontrada.">
 
 
+				<p:column headerText="Codigo" style=" width: 5px">
+					<h:outputText value="#{musica.codigo}" />
+				</p:column>
+
+				<p:column headerText="Musica" style=" width: 20px">
+					<h:outputText value="#{musica.titulo}" />
+				</p:column>
+
+				<p:column headerText="Cantor" style=" width: 20px">
+					<h:outputText value="#{musica.cantor}" />
+				</p:column>
+
+			</p:dataTable>
 
 
 
 
-		<ui:include src="noticiasp.xhtml" />
-		<ui:include src="rodapep.xhtml" />
 
 
-	</div>
-	<!-- /container -->
+			<ui:include src="noticiasp.xhtml" />
+			<ui:include src="rodapep.xhtml" />
+
+
+		</div>
+		<!-- /container -->
+	</f:view>
 </h:body>
 </html>

@@ -73,5 +73,14 @@ public class FilaNoEventoDAO implements Serializable {
 		return em.find(FilaNoEvento.class, codigo);
 	}
 
+	public List<FilaNoEvento> buscarMusicasCantadas(Evento evento) {
+		return em
+				.createQuery(
+						"select f from FilaNoEvento f "
+								+ "where f.evento.id = :evento and f.status = 1 order by f.horacantada desc",
+						FilaNoEvento.class)
+				.setParameter("evento", evento.getId()).getResultList();
+	}
+
 	
 }

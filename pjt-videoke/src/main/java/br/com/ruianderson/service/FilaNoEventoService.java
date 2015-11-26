@@ -108,5 +108,9 @@ public class FilaNoEventoService implements Serializable{
 		return this.filaDAO.buscarFilaPorEvento(evento2);
 	}
 
+	public List<FilaNoEvento> buscarMusicasCantadas(Evento evento2) {
+		return this.filaDAO.buscarMusicasCantadas(evento2);
+	}
+
 	
 }

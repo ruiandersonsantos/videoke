@@ -37,6 +37,9 @@ public class MusicaBean implements Serializable{
 		
 		if(!this.codigo.equals("")){
 			this.musicas = musicaservice.buscarMusicaPorCodigo(codigo);
+			if(musicas.size()==0){
+				FacesUtil.addErrorMessage("Nenhuma musica encontrada!");
+			}
 		}else{
 			
 			if(titulo.equals("") && cantor.equals("")){
@@ -44,6 +47,9 @@ public class MusicaBean implements Serializable{
 			}else{
 				
 				this.musicas = musicaservice.buscarMusica(titulo, cantor);
+				if(musicas.size()==0){
+					FacesUtil.addErrorMessage("Nenhuma musica encontrada!");
+				}
 			}
 			
 			

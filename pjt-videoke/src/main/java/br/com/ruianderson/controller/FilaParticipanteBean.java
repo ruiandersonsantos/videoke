@@ -25,15 +25,23 @@ public class FilaParticipanteBean  implements Serializable{
 	
 	private List<FilaNoEvento> listaParaCantar;
 	
-	public void buscarFilaDoParticipante(Evento evento){
+	private List<FilaNoEvento> musicasCantadas;
 	
+	public void buscarFilaDoParticipante(Evento evento){
+		musicasCantadas.clear();
 		listaParaCantar = this.filanoeventoservice.buscarFilaParticipante(evento);
 			
 	}
 	
+	public void buscarMuscasCantadas(Evento evento){
+		listaParaCantar.clear();
+		musicasCantadas = this.filanoeventoservice.buscarMusicasCantadas(evento);
+	}
+	
 	@PostConstruct
 	public void init() {
-		//this.listaParaCantar = new ArrayList<FilaNoEvento>();
+		this.listaParaCantar = new ArrayList<FilaNoEvento>();
+		this.musicasCantadas = new ArrayList<FilaNoEvento>();
 	}
 
 	public List<FilaNoEvento> getListaParaCantar() {
@@ -43,6 +51,16 @@ public class FilaParticipanteBean  implements Serializable{
 	public void setListaParaCantar(List<FilaNoEvento> listaParaCantar) {
 		this.listaParaCantar = listaParaCantar;
 	}
+
+	public List<FilaNoEvento> getMusicasCantadas() {
+		return musicasCantadas;
+	}
+
+	public void setMusicasCantadas(List<FilaNoEvento> musicasCantadas) {
+		this.musicasCantadas = musicasCantadas;
+	}
+	
+	
 	
 	
 	
