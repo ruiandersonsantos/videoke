@@ -18,6 +18,7 @@
 
 
 	<!-- Conexão com o banco na web -->
+	
 	<Resource name="jdbc/GerenciadorAcessoDB"
 	auth="Container"
 	type="javax.sql.DataSource"

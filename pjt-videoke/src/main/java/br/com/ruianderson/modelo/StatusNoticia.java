@@ -4,6 +4,7 @@ public enum StatusNoticia {
 	
 	ATIVA,
 	INATIVA,
-	SUSPENSA
+	SUSPENSA,
+	ANALISE
 
 }

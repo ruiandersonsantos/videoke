@@ -1,6 +1,5 @@
 package br.com.ruianderson.modelo;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,17 +8,27 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name="Noticia", indexes={
+		@Index(columnList="datafim",unique=false, name="idx_datafim"),
+		@Index(columnList="tiponoticia",unique=false, name="idx_tiponoticia"),
+		@Index(columnList="statusnoticia",unique=false, name="idx_statusnoticia"),
+		@Index(columnList="dataInicio",unique=false, name="idx_dataInicio"),
+		@Index(columnList="titulo",unique=false, name="idx_titulo")
+})
 public class Noticia {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
+	
 	private String textochamada;
 	@Lob
 	private String textodanoticia;
